@@ -1,15 +1,15 @@
-// Our basic kintai model has `content`, `order`, and `done` attributes.
-var kintai = Parse.Object.extend("kintai", {
+var kintai = Parse.Object.extend("Kintai", {
   // Default attributes for the kintai.
   defaults: {
-    content: "empty kintai...",
+    type: 0,
+    date: new Date(),
     done: false
   },
 
-  // Ensure that each kintai created has `content`.
+  // Ensure that each kintai created has `date`.
   initialize: function() {
-    if (!this.get("content")) {
-      this.set({"content": this.defaults.content});
+    if (!this.get("date")) {
+      this.set({"date": this.defaults.date});
     }
   },
 

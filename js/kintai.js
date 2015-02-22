@@ -145,7 +145,7 @@ var ManagekintaisView = Parse.View.extend({
     if (e.keyCode != 13) return;
 
     this.kintais.create({
-      content: this.input.val(),
+      date: this.input.val(),
       order:   this.kintais.nextOrder(),
       done:    false,
       user:    Parse.User.current(),
@@ -215,7 +215,7 @@ var kintaiView = Parse.View.extend({
 
   // Close the `"editing"` mode, saving changes to the kintai.
   close: function() {
-    this.model.save({content: this.input.val()});
+    this.model.save({date: this.input.val()});
     $(this.el).removeClass("editing");
   },
 
@@ -304,6 +304,7 @@ var kintaiView = Parse.View.extend({
 
     initialize: function() {
       this.render();
+      $( ".datepicker" ).datepicker();
     },
 
     render: function() {
