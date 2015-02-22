@@ -80,6 +80,8 @@ var ManagekintaisView = Parse.View.extend({
     var done = this.kintais.done().length;
     var remaining = this.kintais.remaining().length;
 
+    this.input.datepicker();
+
     this.$('#kintai-stats').html(this.statsTemplate({
       total:      this.kintais.length,
       done:       done,
@@ -199,6 +201,7 @@ var kintaiView = Parse.View.extend({
   render: function() {
     $(this.el).html(this.template(this.model.toJSON()));
     this.input = this.$('.edit');
+    this.input.datepicker();
     return this;
   },
 
@@ -215,7 +218,8 @@ var kintaiView = Parse.View.extend({
 
   // Close the `"editing"` mode, saving changes to the kintai.
   close: function() {
-    this.model.save({date: this.input.val()});
+    this.model.save({date: this.input.datepicker("getDate").format("{yyyy}/{MM}/{dd}") });
+    this.input.datepicker("hide");
     $(this.el).removeClass("editing");
   },
 
@@ -304,7 +308,6 @@ var kintaiView = Parse.View.extend({
 
     initialize: function() {
       this.render();
-      $( ".datepicker" ).datepicker();
     },
 
     render: function() {
