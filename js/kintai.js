@@ -26,7 +26,7 @@ var ManagekintaisView = Parse.View.extend({
 
   // Delegated events for creating new items, and clearing completed ones.
   events: {
-    "keypress #new-kintai":  "createOnEnter",
+    "change #new-kintai":  "createOnEnter",
     "click #clear-completed": "clearCompleted",
     "click #toggle-all": "toggleAllComplete",
     "click .log-out": "logOut",
@@ -144,10 +144,9 @@ var ManagekintaisView = Parse.View.extend({
   // If you hit return in the main input field, create new kintai model
   createOnEnter: function(e) {
     var self = this;
-    if (e.keyCode != 13) return;
 
     this.kintais.create({
-      date: this.input.val(),
+      date: this.input.datepicker("getDate").format("{yyyy}/{MM}/{dd}"),
       order:   this.kintais.nextOrder(),
       done:    false,
       user:    Parse.User.current(),
